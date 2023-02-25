@@ -1,15 +1,10 @@
 import React from "react";
-import "./style.css";
+
+import { Button , Container , List} from "./styles"
 
 function App() {
-
-
-
-
     const [comentario, setComentario] = React.useState()
     const [todosOsComentarios, setTodosOsComentarios] = React.useState([])
-
-
 
     function digiteiNoTextArea(eventoDoTextArea){
       setComentario(eventoDoTextArea.target.value)
@@ -17,22 +12,22 @@ function App() {
     
     function cliqueiNoBotao(){
       const todosOsComentariosAnteriores = [...todosOsComentarios,comentario]
-      setTodosOsComentarios(comentario)
+      setTodosOsComentarios(todosOsComentariosAnteriores)
     }
-
-
 
     return(
 
-    <div>
+      <Container>
       <h2>Começando no React.js</h2> 
-      <textarea onChange={digiteiNoTextArea}></textarea>
-      <button onClick={cliqueiNoBotao}>Comentar</button>
+      <textarea onChange={digiteiNoTextArea}> </textarea>
+      <Button isOn={comentario} onClick={cliqueiNoBotao}>Comentar</Button>
 
-      <ul>
-        <li>{todosOsComentarios}</li>
-      </ul>
-    </div>
+      <List>
+        {todosOsComentarios.map((coment) => (
+          <li key={coment}> {coment}</li>
+        ))}
+      </List>
+    </Container>
   );
 }
 
